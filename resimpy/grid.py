@@ -213,7 +213,7 @@ class Grid(BaseModel):
     dx: Optional[Union[List[float],float]] = Field(None)
     dy: Optional[Union[List[float],float]] = Field(None)
     dz: Optional[Union[List[float],float]] = Field(None)
-    origin: Point = Field(Point(0,0))
+    origin: Point = Field(Point(0,0,0))
     azimuth: float = Field(0, ge=0, le=360)
     dip: float = Field(0, ge=0, le=90)
     plunge: float = Field(0, ge=0, le=90)
@@ -229,7 +229,7 @@ class Grid(BaseModel):
     @validator('tops')
     def match_tops(cls,v,values):
         if values['grid_type'] != GridTypeEnum.cartesian:
-            raise ValueError('Deltas must be set on cartesian grid')
+            raise ValueError('tops must be set on cartesian grid')
         n = values['nx'] * values['ny'] * values['nz']
         ntop = values['nx'] * values['ny']
         if isinstance(v,list):
@@ -292,7 +292,7 @@ class Grid(BaseModel):
         #Vertices coordinates starting at 0,0,0
         x_vert_cord = np.concatenate((np.zeros(1),np.array(self.dx).reshape((self.nx,self.ny,self.nz),order='f')[:,0,0]),axis=0).cumsum()
         y_vert_cord = np.concatenate((np.zeros(1),np.array(self.dy).reshape((self.nx,self.ny,self.nz),order='f')[0,:,0]),axis=0).cumsum()
-        z_vert_cord = -np.concatenate((np.zeros(1),np.array(self.dz).reshape((self.nx,self.ny,self.nz),order='f')[0,0,:]),axis=0).cumsum()
+        z_vert_cord = np.concatenate((np.zeros(1),np.array(self.dz).reshape((self.nx,self.ny,self.nz),order='f')[0,0,:]),axis=0).cumsum()
 
         points = np.zeros(((self.nx+1)*(self.ny+1)*(self.nz+1),3))
         for k in range(self.nz+1):
@@ -307,7 +307,7 @@ class Grid(BaseModel):
         rot_points = rotation(points,self.azimuth,self.dip,self.plunge)
         
         #Adjust the coordinates according with Origin Point
-        origin = np.array([self.origin.x,self.origin.y,self.origin.z])
+        origin = np.array([self.origin.x,self.origin.y,self.tops[0]])
 
         _vertices_coord = rot_points + origin
         return _vertices_coord
@@ -771,7 +771,7 @@ class Grid(BaseModel):
 
         elif self.grid_type == 'cartesian':
             p= self.get_vertices_id(i,j,k)
-            coords = [[self.cartesian_vertices_coord()[i,0],self.cartesian_vertices_coord()[i,1],self.cartesian_vertices_coord()[i,2]] for i in p]
+            coords = [[self.cartesian_vertices_coord()[pi,0],self.cartesian_vertices_coord()[pi,1],self.cartesian_vertices_coord()[pi,2]] for pi in p]
             if order == 'GRD':
                 v_coord = np.array(coords)
             elif order == 'VTK':
