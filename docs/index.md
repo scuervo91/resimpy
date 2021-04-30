@@ -3,7 +3,9 @@
 + **Documentation** [http://scuervo91.github.io/resimpy](http://scuervo91.github.io/resimpy)
 + **Sorce Code** [https://github.com/scuervo91/resimpy](https://github.com/scuervo91/resimpy)
 
-Resimpy is a Reservoir Simulation utility python package for Oil & Gas. So far, you can create a cartesian grid an a corner point grid with spatial data. that includes the classes and functions to perform a simple production forecast as well as probabilistic Well Schedules with cashflow analysis.  
+Resimpy is a Reservoir Simulation utility python package for Oil & Gas. So far, you can create a cartesian grid an a corner point grid with spatial data. 
+
+Funtionality of reading Eclipse files is provided by the repository [https://github.com/BinWang0213/PyGRDECL](https://github.com/BinWang0213/PyGRDECL)
 
 The key features are:
 
