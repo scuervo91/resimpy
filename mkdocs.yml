@@ -28,4 +28,3 @@ repo_name: scuervo91/resimpy
 
 plugins:
   - search
-  - mkdocstrings
