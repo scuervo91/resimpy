@@ -3,7 +3,7 @@ import pandas as pd
 import os 
 from datetime import date
 
-def schedule_writer(keywords_dict, keywords, start_date=None, end_date=None):
+def schedule_writer(keywords_dict, start_date=None, end_date=None):
     string = ""
     string += "RPTRST\n 'BASIC=1' /\n"
     string += "RPTSCHED\n 'FIP=1' 'WELLS=1' 'WELLSPECS' /\n"
@@ -41,9 +41,6 @@ def schedule_writer(keywords_dict, keywords, start_date=None, end_date=None):
             if key=='DATES':
                 write_date_keyword = True if write_date_keyword else False
                 continue               
-            elif key not in keywords:
-                write_date_keyword = True if write_date_keyword else False
-                continue
             
             key_date = keywords_dict[key].loc[keywords_dict[key]['date']==pd.Timestamp(date)]
             if key_date.empty:
