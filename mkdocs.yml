@@ -1,0 +1,31 @@
+site_name: Resimpy
+theme:
+  name: material
+  palette:
+    scheme: preference
+    primary: blue grey
+    accent: deep purple
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - search.suggest
+    - search.highlight
+  icon:
+    repo: fontawesome/brands/github
+
+nav:
+  - Home: index.md
+  - Tutorial:
+    - Cartesian and Corner Point Grid: tutorial/1a-Cartesian-CornerPoint/1a-Basics.md
+    - Read Grid from Eclipse file: tutorial/1b-Read_ecl_files/1b-Basics_read_eclipse_grid.md
+    - Write Schedule file keywords: tutorial/1c-Write schedule_file.md
+
+
+repo_url: https://github.com/scuervo91/resimpy
+repo_name: scuervo91/resimpy
+
+plugins:
+  - search
+  - mkdocstrings
