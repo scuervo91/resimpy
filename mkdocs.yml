@@ -1,4 +1,4 @@
-site_name: DCApy
+site_name: Resimpy
 theme:
   name: material
   palette:
@@ -17,27 +17,9 @@ theme:
 
 nav:
   - Home: index.md
-  - Code Reference:
-    - dca: dca-reference.md
-    - filters: filters-reference.md
-    - cashflow: schedule-reference.md 
-    - cashflow: cashflow-reference.md 
-    - weiner: wiener-reference.md 
-  - Tutorial:
-    - Intro: tutorial/1-Intro.md
-    - Arps Declination:
-      - Arps Basics: tutorial/1a-Tutorial-Arps_basic_dca.md
-      - Arps Class: tutorial/1b-Tutorial-Arps_Class/1b-Tutorial-Arps_Class.md
-      - Wor Basis&Class: tutorial/1c-Tutorial-Wor_basic.md
-      - Probabilistic Class: tutorial/1d-Tutorial-Probabilistic/1d-Tutorial_Probabilistic_Variables.md
-      - Data Fitting Aprs and Wor: tutorial/1e-Tutorial-fitting/1e-Tutorial_Fit data.md
-    - Cashflows:
-      - Cashflow Basics: tutorial/2a-Tutorial_Cashflow_basics/2a-Cashflow Basics.md
-    - Wiener Proccesses:
-      - Wiener Proccesses: tutorial/3a-Tutorial-Wiener/3-Wiener_procces.md
 
-repo_url: https://github.com/orkahub/dcapy
-repo_name: orkahub/dcapy
+repo_url: https://github.com/scuervo91/resimpy
+repo_name: scuervo91/resimpy
 
 plugins:
   - search

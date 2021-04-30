@@ -10,7 +10,7 @@ The key features are:
 + **Grid**: Create Cartesian grid and Corner Point Grid
 + **Spatial Data**: Add spatial data like porosity and permeability 
 + **Manipulate**: Manipulate data gridding data
-+ **Export to vyt**: Use PyVista to export and view the model en 3D
++ **Export to vtk**: Use PyVista to export and view the model en 3D
 + **Export to Eclipse**: Export the grid to Eclipse format (GRID SECTION)
 + **Write Schedule Keywords**: Write keywords like WELSPECS, COMPDAT, WCONHIST, 
 
