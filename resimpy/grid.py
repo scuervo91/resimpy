@@ -109,9 +109,9 @@ def cell_id(i,j,k,nx,ny):
         | 0,0  |  1,0  |  2,0 |  <- Cell id 0,1,2
         * ---  *  ---  * ---  *
     """
-    cell = (nx*j+i)+k*nx*ny
+    cell = (nx*j+(i+1))+k*nx*ny
 
-    return cell
+    return cell-1
 
 def cell_ijk(cell_id,nx,ny):
     """
@@ -124,12 +124,11 @@ def cell_ijk(cell_id,nx,ny):
         | 0,0  |  1,0  |  2,0 |  <- Cell id 0,1,2
         * ---  *  ---  * ---  *
     """
-    if cell_id==0:
-        return 0,0,0
-    k=math.ceil(cell_id/(nx*ny))-1
-    j=math.ceil((cell_id-(nx*ny)*k)/nx)-1
-    i=math.ceil(cell_id-(nx*ny*k)-nx*j)
-    return i,j,k
+    cell_id += 1
+    k=math.ceil(cell_id/(nx*ny))
+    j=math.ceil((cell_id-(nx*ny)*(k-1))/nx)
+    i=math.ceil(cell_id-(nx*ny*(k-1))-nx*(j-1))
+    return i-1,j-1,k-1
 
 #Interpolate z on pillars
 def interpolate_z_pillar(z,p):
