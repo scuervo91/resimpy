@@ -457,7 +457,11 @@ class Grid(BaseModel):
                     #DataArray=self.read_IncludeFile(os.path.join(folder_name,DataArray[0]),self.n)
                 print(f'------{Keyword}------')
 
-                DataArray=parseDataArray(DataArray)
+                try:
+                    DataArray=parseDataArray(DataArray)
+                except Exception as e:
+                    print(e)
+                    continue
             
 
                 #Read Grid spatial information, x,y,z ordering
@@ -485,7 +489,11 @@ class Grid(BaseModel):
 
                 #Read Grid Properties information
                 else:
-                    self.LoadVar(Keyword,DataArray,DataSize=self.n)
+                    try:
+                        self.LoadVar(Keyword,DataArray,DataSize=self.n)
+                    except Exception as e:
+                        print(e)
+                        continue
 
         f.close()
         #assert GoodFlag==1,'Can not find grid dimension info, [SPECGRID] or [DIMENS]!'
@@ -493,7 +501,7 @@ class Grid(BaseModel):
 
 
         #Genetrate TOPS for cartesian grid if TOPS if not given
-        if(self.grid_type=='Cartesian' and len(self.tops)==0):
+        if(self.grid_type=='cartesian' and self.tops is None):
             tops=np.zeros(self.n)
             for k in range(self.nz-1):
                 for j in range(self.ny):
@@ -501,7 +509,7 @@ class Grid(BaseModel):
                         ijk=cell_id(i,j,k,self.nx,self.ny)
                         ijk_next=cell_id(i,j,k+1,self.nx,self.ny)
                         tops[ijk_next] = tops[ijk] + self.dz[ijk]
-            self.tops=tops
+            self.tops=tops.tolist()
 
 
     def to_ecl(self, filename=None, keywords=None, one_file=False, return_string=False, save_file=True):
